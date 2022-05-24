@@ -1,26 +1,30 @@
 const path = require("path");
 
-path.extname("package.json");
-//Nos dice la extensión del fichero
+// Nos devuelve la extensión de un fichero
+const ext = path.extname("package.json");
 
-path.join("carpeta1", "carpeta2", "datos/images");
-//construye una ruta con todos los elementos que le pasemos
+console.log(ext);
 
-// const fs = require("fs");
-const fs = require("fs").promises;
+const pathJoined = path.join(
+  "carpeta1",
+  "carpeta2",
+  "datos/imagenes",
+  "imagen1.jpg"
+);
 
-const writeAndReadFile = async (filePath, content) => {
-  try {
-    await fs.writeFile(filePath, content);
+console.log(pathJoined);
 
-    const readContent = await fs.readFile(filePath, "utf-8");
+const packageJsonAbsolutePath = path.join(__dirname, "package.json");
 
-    return readContent;
-  } catch (error) {
-    console.error(error.message);
-  }
-};
+const packageJsonAbsolutePathWithResolve = path.resolve("package.json");
 
-writeAndReadFile("data/saludo.txt", "hola").then((readContent) => {
-  console.log(readContent);
-});
+console.log(packageJsonAbsolutePath, packageJsonAbsolutePathWithResolve);
+
+// CUIDADO! Join y resolve interpretan de forma distinta un cacho de path que empiece por "/". Join lo junta de forma normal, pero resolve elimina todo el path que tenía construído hasta ese momento, y toma esa carpeta como la raíz
+console.log(path.join(__dirname, "/data", "users.json"));
+console.log(path.resolve(__dirname, "/data", "users.json"));
+
+const AVATARS_DIR = "uploads/avatars";
+const avatarName = "defaultAvatar.png";
+
+console.log(path.join(__dirname, AVATARS_DIR, avatarName));
