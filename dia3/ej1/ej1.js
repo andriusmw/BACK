@@ -142,6 +142,8 @@ server.on("request", (request, response) => {
       response.statusCode = 200;
       response.setHeader("Content-Type", "application/json");
       response.end(JSON.stringify(curso));
+      //window.print(method, url);
+      console.log({ method, url });
       break;
     case "/message":
       response.statusCode = 200;
@@ -150,12 +152,14 @@ server.on("request", (request, response) => {
         message: "Hello world!",
       };
       response.end(JSON.stringify(message));
+      console.log({ method, url });
       break;
     default:
       response.statusCode = 404;
       response.setHeader("Content-Type", "application/json");
       const error = "Not Found :(";
       response.end(JSON.stringify(error));
+      console.log({ method, url });
       break;
   }
 });
