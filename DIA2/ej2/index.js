@@ -12,3 +12,22 @@
  * con el contenido "¡Hola Backend!".
  *
  */
+
+const { createDir, writeAndReadFile } = require("../fs.fs");
+const path = require("path");
+
+const emotesDir = path.join(__dirname, "EJ2");
+
+const createNewEjercicio = async (fileName, content) => {
+  try {
+    await createDir(emotesDir);
+
+    const emoteFilePath = path.join(emotesDir, fileName);
+
+    await writeAndReadFile(emoteFilePath, content);
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
+createNewEjercicio("ej2.txt", "¡Hola Backend! ");
