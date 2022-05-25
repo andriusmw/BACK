@@ -113,3 +113,49 @@ server.on("request", (request, response) => {
  *      }
  *
  */
+
+/**
+ * #################
+ * ## Ejercicio 4 ##
+ * #################
+ *
+ * Servidor que se comporta igual que el del ejercicio 3, pero además imprime por pantalla
+ * el *método* y la *URL* de cada request.
+ *
+ */
+
+const http = require("http");
+const curso = require("./curso.json");
+
+const server = http.createServer();
+//Crea un servidor y lo devuelve a la const server
+
+server.listen(4000, () => {
+  console.log("Server listening at http://localhost:4000");
+});
+//levanto el server puerto 4k
+
+server.on("request", (request, response) => {
+  const { method, url } = request;
+  switch (url) {
+    case "/curso":
+      response.statusCode = 200;
+      response.setHeader("Content-Type", "application/json");
+      response.end(JSON.stringify(curso));
+      break;
+    case "/message":
+      response.statusCode = 200;
+      response.setHeader("Content-Type", "application/json");
+      const message = {
+        message: "Hello world!",
+      };
+      response.end(JSON.stringify(message));
+      break;
+    default:
+      response.statusCode = 404;
+      response.setHeader("Content-Type", "application/json");
+      const error = "Not Found :(";
+      response.end(JSON.stringify(error));
+      break;
+  }
+});
