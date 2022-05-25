@@ -4,8 +4,10 @@ const users = require("./users.json");
 const server = http.createServer();
 //Crea un servidor y lo devuelve a la const server
 
+/********************** SERVER.ON ****************************************** */
 server.on("request", (request, response) => {
   const { method, url } = request;
+  //saca el mothod y la url del objeto request
   if (method === "GET" && url === "/users") {
     console.log(users);
     response.end(JSON.stringify(users));
@@ -20,6 +22,8 @@ server.on("request", (request, response) => {
 //server.on -> escucha un evento y hace lo que le digamos en el arrowfunction
 //el tipo de peticion va entre comillas.
 //la request  y la response se pasan al callback.
+
+/*********************** LEVANTAR SERVIDOR *********************************** */
 
 server.listen(3000, () => {
   console.log("Server listening at http://localhost:3000");
