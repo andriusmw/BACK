@@ -10,8 +10,20 @@ server.on("request", (request, response) => {
   //saca el mothod y la url del objeto request
   if (method === "GET" && url === "/users") {
     console.log(users);
-    response.end(JSON.stringify(users));
-    //JSON.stringify passa el trexto de un json
+    response.statusCode = 200;
+    //Establece el codigo de estado
+    response.setHeader("Content-Type", "application/json");
+    //establece el header para el content type
+    response.end(JSON.stringify({ status: "ok", users }));
+    //JSON.stringify pasa el texto de un json
+    //la respuesta manda un objeto con apartado, statuscode, headers, body,etc
+  } else {
+    response.statusCode = 404;
+    //response.end("Not found");
+    response.setHeader("Content-Type", "application/json");
+    response.end(
+      JSON.stringify({ status: "error", message: "Page not found :( " })
+    );
   }
 
   //console.log(request);
