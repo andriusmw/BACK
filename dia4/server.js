@@ -15,7 +15,6 @@ app.use((request, response, next) => {
 });
 app.use((request, response, next) => {
   console.log("Tercer middleware");
-  response.end();
 });
 /************ peticiones y endpoints dentro de middleware ********* */
 app.get("/users", (request, response) => {
@@ -30,6 +29,12 @@ app.post("/users", (request, response) => {
 
 app.get("/data", (request, response) => {
   console.log("get a data");
+  response.end();
+});
+
+/* solo llega aquí sino se mete antes por nada de lo anterior */
+app.use((request, response) => {
+  console.log("404 page not found");
   response.end();
 });
 
