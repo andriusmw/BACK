@@ -11,6 +11,18 @@ app.use((request, response, next) => {
   next();
 });
 
+/*
+
+app.use(morgan("dev"));
+//hace el logg y te saca el método, url, status etc lo mismo que lo 
+del primer middleware
+
+*/
+
+/*
+    app.use(express.json());
+*/
+
 app.use((request, response, next) => {
   console.log("Segundo middleware");
   next();
