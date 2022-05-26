@@ -1,11 +1,13 @@
 const express = require("express");
-
+const morgan = require("morgan");
 const app = express();
 
 /**********  MIDDLEWARES ************** */
 /*app.use recibe cualquier peticion que llegue*/
 app.use((request, response, next) => {
   console.log("Primer middleware");
+  const { method, url } = request;
+  console.log("método " + method + "url " + url);
   next();
 });
 
@@ -24,7 +26,13 @@ app.get("/users", (request, response) => {
 
 app.post("/users", (request, response) => {
   console.log("post a users");
-  response.end();
+  response.statusCode = 200;
+  response.send(JSON.stringify([{ name: "pepe" }]));
+  //response.send detecta el content type automatically y envia
+  //response.set("Content-Type","text/html")
+  //        .setHeader()
+
+  response.json("Hola"); //lo que responde lo manda en tipo .json
 });
 
 app.get("/data", (request, response) => {
