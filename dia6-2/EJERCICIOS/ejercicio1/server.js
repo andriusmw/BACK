@@ -2,10 +2,11 @@ require("dotenv").config();
 const express = require("express");
 const fileUpload = require("express-fileupload");
 
-const registerUser = require("./controllers/users/registerUser");
+//const registerUser = require("./controllers/users/registerUser");
 //impoprtando get cars by id
 const getCarsById = require("./controllers/getCochesByid");
-const getAllCars = require("./controllers/getallcars")
+const getAllCars = require("./controllers/getallcars");
+const addCar = require("./controllers/addCar");
 const app = express();
 
 /** Nos traemos el SERVER_PORT del process.env */
@@ -32,7 +33,7 @@ app.get("/coches" , getAllCars);
 
 
 /*************************************************************** */
-app.post("/users", registerUser);
+app.post("/coches", addCar);
 
 // app.post("/cars", async (req, res, next) => {
 //   try {
