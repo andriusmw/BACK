@@ -5,15 +5,15 @@ const app = express();
 
 const { SERVER_PORT } = process.env;
 
-const { createCar, getCarById, getCars, deletecarbyidservice } = require("./controllers/coches");
+const { createCar, getCarById, getCars, deleteCarById } = require("./controllers/coches");
 
 app.use(express.json());
 
 app.get("/cars", getCars);
 app.get("/cars/:carId", getCarById);
 app.post("/cars", createCar);
-app.put("/cars/:carId", deletecarbyidservice );
-app.delete("/cars/:carId");
+app.put("/cars/:carId",  );
+app.delete("/cars/:carId", deleteCarById);
 
 app.use((error, req, res, next) => {
   console.error(error);
